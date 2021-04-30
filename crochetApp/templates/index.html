@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HoneyBee's MarketPlace</title>
+    {% load static %}
+    <link rel='stylesheet' href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href='/dashboard/'></a>
+        </nav>
+    </header>
+    <div class='main'>
+        <h1>Welcome to HoneyBee's Market Place</h1>
+        <p>Please login to see our products</p>
+        <p>Don't have an account? <a href='signup/'>Sign Up</a></p>
+        <form action='/login/' method='post'>
+            <section class='row'>
+                <label for='username'>Username</label>
+                <input name='username' id='username' type='text'>
+            </section>
+            <section class='row'>
+                <label for='password'>Password</label>
+                <input name='password' id='password' type='password'>
+            </section>
+            <button>Sign In</button>
+        </form>
+    </div>
+    <footer>
+        {% for foot in footer %}
+        <p>{{foot}}</p>
+        {% endfor %}
+    </footer>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Items</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href='#'>View Shop</a>
+            <a href='/add-new/'>Add Items</a>
+            <a href='#'>Other Users</a>
+            <a href='/logout/'>Log Out</a>
+        </nav>
+    </header>
+    <div class='main'>
+        <h3>Welcome, {{username}}</h3>
+        <form action='/postNew' method='post'>
+            {% csrf_token %}
+            <section>
+                <label for='itemTitle'>Item:</label>
+                <input name='itemTitle' id='itemTitle' type='text'>
+            </section>
+            <section>
+                <label for='itemDescription'>Description:</label>
+                <input name='itemDescription' id='itemDescription' type='text'>
+            </section>
+            <section>
+                <label for='itemPrice'>Price:</label>
+                <input name='itemPrice' id='itemPrice' type='number'>
+            </section>
+            <button>Add Item</button>
+        </form>
+    </div>
+    <footer>
+        {% for foot in footer %}
+        <p>{{foot}}</p>
+        {% endfor %}
+    </footer>
+</body>
+</html>

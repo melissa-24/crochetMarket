@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    {% load static %}
+    <link rel='stylesheet' href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href='#'>View Shop</a>
+            <a href='/add-new/'>Add Items</a>
+            <a href='#'>Other Users</a>
+            <a href='/logout/'>Log Out</a>
+        </nav>
+    </header>
+    <div class='main'>
+        <h3>Welcome, {{username}}</h3>
+        <h4>{{resultNew.itemTitle}}</h4>
+        <p>{{resultNew.itemDescription}}</p>
+        <p>${{resultNew.itemPrice}}</p>
+    </div>
+    <footer>
+        {% for foot in footer %}
+        <p>{{foot}}</p>
+        {% endfor %}
+    </footer>
+</body>
+</html>

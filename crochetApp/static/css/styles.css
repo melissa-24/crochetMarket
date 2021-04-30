@@ -1,0 +1,59 @@
+body {
+  background-color: green;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+body header {
+  border: 3px solid black;
+  padding: 1em;
+}
+body header a {
+  padding: 0.5em;
+  color: white;
+  text-decoration: none;
+}
+body .main {
+  border: 3px solid black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+body .main h1 {
+  margin: 1em;
+}
+body .main form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+body .main form label {
+  margin: 0.5em;
+}
+body .main form input {
+  margin: 0.5em;
+}
+body .main form button {
+  margin: 0.5em;
+  padding: 0.5em;
+}
+body .main a {
+  color: white;
+  text-decoration: none;
+  border: 3px solid black;
+  padding: 0.2em;
+}
+body footer {
+  border: 3px solid black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1em;
+}
+body footer p {
+  color: white;
+}

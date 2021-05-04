@@ -1,3 +1,15 @@
+.flexcolumn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.flexrow {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
 body {
   background-color: green;
   display: flex;
@@ -46,6 +58,38 @@ body .main a {
   border: 3px solid black;
   padding: 0.2em;
 }
+body .main .products {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+body .main .products .product {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin: 0.5em;
+  border: 3px groove yellowgreen;
+}
+body .main .products .product .left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0.5em;
+}
+body .main .products .product .left img {
+  max-width: 250px;
+}
+body .main .products .product .right {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0.5em;
+}
 body footer {
   border: 3px solid black;
   display: flex;
@@ -56,4 +100,7 @@ body footer {
 }
 body footer p {
   color: white;
+}
+body footer img {
+  max-width: 25px;
 }

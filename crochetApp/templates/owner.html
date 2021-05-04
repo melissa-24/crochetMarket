@@ -12,8 +12,7 @@
     <div class='main'>
         <h1>Welcome to the Market Place</h1>
         <p>Please login to see our products</p>
-        <p>Don't have an account? <a href='signup/'>Sign Up</a></p>
-        <p>Are you a shop owner? <a href='owner/'>Shop Login</a></p>
+        <p>Not a shop owner? <a href='/'>Member Login</a></p>
         {% if messages %}
         <ul class="messages">
             {% for message in messages %}
@@ -21,7 +20,7 @@
             {% endfor %}
         </ul>
         {% endif %}
-        <form action='/login/' method='post'>
+        <form action='/ownerLogin/' method='post'>
             {% csrf_token %}
             <section class='row'>
                 <label for='username'>Username</label>

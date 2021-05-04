@@ -11,21 +11,23 @@
 <body>
     <header>
         <nav>
-            <a href='#'>View Shop</a>
-            <a href='/add-new/'>Add Items</a>
-            <a href='#'>Other Users</a>
             <a href='/logout/'>Log Out</a>
         </nav>
     </header>
     <div class='main'>
         <h3>Welcome, {{user.firstName}}</h3>
+        <h3>All products</h3>
         <div class='products'>
-            <h3>All products</h3>
             {% for product in allProducts %}
             <div class='product'>
-                <h4>{{product.itemName}}</h4>
-                <p>{{product.itemDescription}}</p>
-                <p>${{product.itemPrice}}</p>
+                <div class='left'>
+                    <img src='{{product.itemImg}}' alt='{{product.itemName}}'/>
+                    <p><b>${{product.itemPrice}}</b></p>
+                </div>
+                <div class='right'>
+                    <h4>{{product.itemName}}</h4>
+                    <p>{{product.itemDescription}}</p>
+                </div>                
             </div>
             {% endfor %}
         </div>
@@ -34,6 +36,7 @@
         {% for foot in footer %}
         <p>{{foot}}</p>
         {% endfor %}
+        <a href='admin/'><img src="{% static 'images/Capture.PNG' %}" /></a>
     </footer>
 </body>
 </html>

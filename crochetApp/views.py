@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Products, User
+from .models import Products, User, OwnerUser
 
 FOOTER = {
     'Created by Melissa',
@@ -24,6 +24,19 @@ def register(request):
         newUser = User.objects.register(request.POST)
         request.session['user_id'] = newUser.id
         return redirect('/dashboard/')
+
+def ownerRegister(request):
+    if request.method == "GET":
+        return redirect('/ownerSignup/')
+    errors = OwnerUser.objects.validate(request.POST)
+    if errors:
+        for err in errors.values():
+            messages.error(request, err)
+        return redirect('/ownerSignup/')
+    else:
+        newOwnerUser = OwnerUser.objects.register(request.POST)
+        request.session['ownerUser_id'] = newOwnerUser.id
+        return redirect('/OwnerDashboard/')
 
 def login(request):
     if request.method == 'GET':

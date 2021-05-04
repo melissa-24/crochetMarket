@@ -1,9 +1,21 @@
-body {
-    background-color: green;
+.flexcolumn {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.flexrow {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+
+body {
+    background-color: green;
+    .flexcolumn();
 
     header {
         border: 3px solid black;
@@ -17,20 +29,14 @@ body {
     }
     .main {
         border: 3px solid black;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
+        .flexcolumn();
 
         h1 {
             margin: 1em;
         }
 
         form {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            .flexcolumn();
 
             label {
                 margin: .5em;
@@ -49,6 +55,29 @@ body {
             border: 3px solid black;
             padding: .2em;
         }
+        .products {
+            .flexrow();
+            flex-wrap: wrap;
+
+            .product {
+                .flexrow();
+                margin: .5em;
+                border: 3px groove yellowgreen;
+
+                .left {
+                    .flexcolumn();
+                    margin: .5em;
+
+                    img {
+                        max-width: 250px;
+                    }
+                }
+                .right {
+                    .flexcolumn();
+                    margin: .5em;
+                }
+            }
+        }
     }
     footer {
         border: 3px solid black;
@@ -60,6 +89,9 @@ body {
 
         p {
             color: white;
+        }
+        img {
+            max-width: 25px;
         }
     }
 }

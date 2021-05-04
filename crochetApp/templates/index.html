@@ -9,16 +9,19 @@
     <link rel='stylesheet' href="{% static 'css/styles.css' %}">
 </head>
 <body>
-    <header>
-        <nav>
-            <a href='/dashboard/'></a>
-        </nav>
-    </header>
     <div class='main'>
         <h1>Welcome to HoneyBee's Market Place</h1>
         <p>Please login to see our products</p>
         <p>Don't have an account? <a href='signup/'>Sign Up</a></p>
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
         <form action='/login/' method='post'>
+            {% csrf_token %}
             <section class='row'>
                 <label for='username'>Username</label>
                 <input name='username' id='username' type='text'>

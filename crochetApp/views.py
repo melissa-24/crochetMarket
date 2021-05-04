@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Products
+from .models import Products, User
 
 FOOTER = {
     'Created by Melissa',
@@ -12,6 +12,29 @@ def index(request):
     }
     return render(request, "index.html", context)
 
+def register(request):
+    if request.method == "GET":
+        return redirect('/signup/')
+    errors = User.objects.validate(request.POST)
+    if errors:
+        for err in errors.values():
+            messages.error(request, err)
+        return redirect('/signup/')
+    else:
+        newUser = User.objects.register(request.POST)
+        request.session['user_id'] = newUser.id
+        return redirect('/dashboard/')
+
+def login(request):
+    if request.method == 'GET':
+        return redirect('/')
+    if not User.objects.authenticate(request.POST['username'], request.POST['password']):
+        messages.error(request, 'Invalid Username/Password')
+        return redirect('/')
+    user = User.objects.get(username=request.POST['username'])
+    request.session['user_id'] = user.id
+    return redirect('/dashboard/')
+
 def signup(request):
     context = {
         'footer': FOOTER
@@ -23,9 +46,12 @@ def logout(request):
     return redirect('/')
 
 def dashboard(request):
+    if 'user_id' not in request.session:
+        return redirect('/')
+    user = User.objects.get(id=request.session['user_id'])
     context = {
         'footer': FOOTER,
-        'username': 'Melissa',
+        'user': user,
         'allProducts': Products.objects.all().values()
     }
     return render(request, 'dashboard.html', context)

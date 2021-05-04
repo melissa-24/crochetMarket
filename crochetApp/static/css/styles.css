@@ -20,6 +20,29 @@ body {
 body header {
   border: 3px solid black;
   padding: 1em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-image: url('/crochetApp/static/images/honeycombBG.png');
+}
+body header form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffca0a67;
+  border-radius: 20%;
+}
+body header form label {
+  margin: 0.5em;
+}
+body header form input {
+  margin: 0.5em;
+}
+body header form button {
+  margin: 0.5em;
+  padding: 0.5em;
 }
 body header a {
   padding: 0.5em;
@@ -103,4 +126,9 @@ body footer p {
 }
 body footer img {
   max-width: 25px;
+}
+body footer a {
+  padding: 0.5em;
+  color: white;
+  text-decoration: none;
 }

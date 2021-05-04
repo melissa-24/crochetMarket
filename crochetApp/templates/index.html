@@ -9,18 +9,10 @@
     <link rel='stylesheet' href="{% static 'css/styles.css' %}">
 </head>
 <body>
-    <div class='main'>
+    <header>
         <h1>Welcome to the Market Place</h1>
         <p>Please login to see our products</p>
         <p>Don't have an account? <a href='signup/'>Sign Up</a></p>
-        <p>Are you a shop owner? <a href='owner/'>Shop Login</a></p>
-        {% if messages %}
-        <ul class="messages">
-            {% for message in messages %}
-            <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-            {% endfor %}
-        </ul>
-        {% endif %}
         <form action='/login/' method='post'>
             {% csrf_token %}
             <section class='row'>
@@ -33,11 +25,12 @@
             </section>
             <button>Sign In</button>
         </form>
-    </div>
+    </header>
     <footer>
         {% for foot in footer %}
         <p>{{foot}}</p>
         {% endfor %}
+        <p>Are you a shop owner? <a href='owner/'>Shop Login</a></p>
         <a href='admin/'><img src="{% static 'images/Capture.PNG' %}" /></a>
     </footer>
 </body>

@@ -3,56 +3,70 @@ from .models import Products, User, OwnerUser
 
 FOOTER = {
     'Created by Melissa',
-    'Thank you for visiting the Django Market'
+    'Thank you for visiting the Market Place'
 }
 
+# Main Landing page (general user sign-in)
 def index(request):
     context = {
         'footer': FOOTER
     }
     return render(request, "index.html", context)
 
+# Shop owner landing page
+def shopIndex(request):
+    context = {
+        'footer': FOOTER
+    }
+    return render(request, 'owner.html', context)
+
+# General user register route
 def register(request):
     if request.method == "GET":
-        return redirect('/signup/')
-    errors = User.objects.validate(request.POST)
-    if errors:
-        for err in errors.values():
-            messages.error(request, err)
         return redirect('/signup/')
     else:
         newUser = User.objects.register(request.POST)
         request.session['user_id'] = newUser.id
         return redirect('/dashboard/')
 
+# Shop Owner Register route
 def ownerRegister(request):
     if request.method == "GET":
-        return redirect('/ownerSignup/')
-    errors = OwnerUser.objects.validate(request.POST)
-    if errors:
-        for err in errors.values():
-            messages.error(request, err)
-        return redirect('/ownerSignup/')
+        return redirect('/shop-signup/')
     else:
         newOwnerUser = OwnerUser.objects.register(request.POST)
         request.session['ownerUser_id'] = newOwnerUser.id
-        return redirect('/OwnerDashboard/')
+        return redirect('/dashboard/')
 
+# General user login route
 def login(request):
     if request.method == 'GET':
-        return redirect('/')
-    if not User.objects.authenticate(request.POST['username'], request.POST['password']):
-        messages.error(request, 'Invalid Username/Password')
         return redirect('/')
     user = User.objects.get(username=request.POST['username'])
     request.session['user_id'] = user.id
     return redirect('/dashboard/')
 
+# Shop owner login route
+def ownerLogin(request):
+    if request.method == 'GET':
+        return redirect('/owner')
+    user = OwnerUser.objects.get(ownerUsername=request.POST['ownerUsername'])
+    request.session['ownerUser_id'] = user.id
+    return redirect('/dashboard/')
+
+# Register landing page (for General Users)
 def signup(request):
     context = {
         'footer': FOOTER
     }
     return render(request, 'register.html', context)
+
+# Register landing page (for Shop Owners)
+def ownerSignup(request):
+    context = {
+        'footer': FOOTER
+    }
+    return render(request, 'ownerRegister.html', context)
 
 def logout(request):
     # request.session.clear()

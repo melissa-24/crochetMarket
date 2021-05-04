@@ -4,36 +4,40 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
+    <title>Shop Owner Register</title>
     {% load static %}
     <link rel='stylesheet' href="{% static 'css/styles.css' %}">
 </head>
 <body>
     <header>
         <h1>Welcome to The Market Place</h1>
-        <p>Please register to see our products or add your own</p>
+        <p>Please register to add your own products</p>
         <p>Already have an account? <a href='/'>Sign In</a></p>
-        <form action='/register/' method='post'>
+        <form action='/shop-register/' method='post'>
             {% csrf_token %}
             <section class='row'>
-                <label for='firstName'>First Name:</label>
-                <input type='text' name='firstName' id='firstName'>
+                <label for='ownerFirstName'>First Name:</label>
+                <input type='text' name='ownerFirstName' id='ownerFirstName'>
             </section>
             <section class='row'>
-                <label for='lastName'>Last Name:</label>
-                <input type='text' name='lastName' id='lastName'>
+                <label for='ownerLastName'>Last Name:</label>
+                <input type='text' name='ownerLastName' id='ownerLastName'>
             </section>
             <section class='row'>
-                <label for='username'>Username:</label>
-                <input type='text' name='username' id='username'>
+                <label for='ownerUsername'>Username:</label>
+                <input type='text' name='ownerUsername' id='ownerUsername'>
             </section>
             <section class='row'>
-                <label form='email'>Email Address:</label>
-                <input type='email' name='email' id='email'>
+                <label form='ownerEmail'>Email Address:</label>
+                <input type='email' name='ownerEmail' id='ownerEmail'>
             </section>
             <section class='row'>
-                <label for='password'>Password:</label>
-                <input type='password' name='password' id='password'>
+                <label for='shopName'>Shop Name:</label>
+                <input type='text' name='shopName' id='shopName'>
+            </section>
+            <section class='row'>
+                <label for='ownerPassword'>Password:</label>
+                <input type='password' name='ownerPassword' id='ownerPassword'>
             </section>
             <section class='row'>
                 <label for='confirm'>Confirm Password</label>

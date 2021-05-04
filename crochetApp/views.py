@@ -50,8 +50,8 @@ def login(request):
 def ownerLogin(request):
     if request.method == 'GET':
         return redirect('/owner')
-    user = OwnerUser.objects.get(ownerUsername=request.POST['ownerUsername'])
-    request.session['ownerUser_id'] = user.id
+    ownerUser = OwnerUser.objects.get(ownerUsername=request.POST['ownerUsername'])
+    request.session['ownerUser_id'] = ownerUser.id
     return redirect('/dashboard/')
 
 # Register landing page (for General Users)

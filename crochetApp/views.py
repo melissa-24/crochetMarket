@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from .models import Products
 
 FOOTER = {
     'Created by Melissa',
@@ -25,21 +26,6 @@ def dashboard(request):
     context = {
         'footer': FOOTER,
         'username': 'Melissa',
+        'allProducts': Products.objects.all().values()
     }
     return render(request, 'dashboard.html', context)
-
-def addNew(request):
-    context = {
-        'footer': FOOTER
-    }
-    return render(request, 'addItems.html', context)
-
-def postNew(request):
-    if request.method == 'GET':
-        return redirect('/add-new')
-    request.session['resultNew'] = {
-        'itemTitle': request.POST['itemTitle'],
-        'itemDescription': request.POST['itemDescription'],
-        'itemPrice': request.POST['itemPrice'],
-    }
-    return redirect('/dashboard')

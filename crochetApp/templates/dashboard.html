@@ -19,9 +19,16 @@
     </header>
     <div class='main'>
         <h3>Welcome, {{username}}</h3>
-        <h4>{{resultNew.itemTitle}}</h4>
-        <p>{{resultNew.itemDescription}}</p>
-        <p>${{resultNew.itemPrice}}</p>
+        <div class='products'>
+            <h3>All products</h3>
+            {% for product in allProducts %}
+            <div class='product'>
+                <h4>{{product.itemName}}</h4>
+                <p>{{product.itemDescription}}</p>
+                <p>${{product.itemPrice}}</p>
+            </div>
+            {% endfor %}
+        </div>
     </div>
     <footer>
         {% for foot in footer %}

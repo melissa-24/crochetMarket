@@ -4,14 +4,6 @@ import bcrypt
 
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
 
-# Products
-
-class Products(models.Model):
-    itemName = models.CharField(max_length=45)
-    itemDescription = models.TextField()
-    itemPrice = models.CharField(max_length=45)
-    itemImg = models.CharField(max_length=255)
-
 # General users
 
 class UserManager(models.Manager):
@@ -108,7 +100,7 @@ class OwnerUserManager(models.Manager):
         if not ownerUsers:
             return False
         
-        ownerUser = OwnerUsers[0]
+        ownerUser = ownerUsers[0]
         return bcrypt.checkpw(ownerPassword.encode(), ownerUser.ownerPassword.encode())
 
     def register(self, form):
@@ -131,3 +123,16 @@ class OwnerUser(models.Model):
     ownerPassword = models.CharField(max_length=45)
 
     objects = OwnerUserManager()
+
+# Categories
+class Categories(models.Model):
+    catName = models.CharField(max_length=45)
+
+# Products
+
+class Products(models.Model):
+    itemName = models.CharField(max_length=45)
+    itemDescription = models.TextField()
+    itemPrice = models.CharField(max_length=45)
+    itemImg = models.CharField(max_length=255)
+    itemCat = models.ForeignKey(Categories, related_name='category', on_delete=models.CASCADE)

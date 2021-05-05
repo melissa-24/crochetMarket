@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
+    <title>{{ownerUser.shopName}} Dashboard</title>
     {% load static %}
     <link rel='stylesheet' href="{% static 'css/styles.css' %}">
 </head>
@@ -15,11 +15,12 @@
         </nav>
     </header>
     <div class='main'>
-        <h3>Welcome, {{user.firstName}} to The Market Place</h3>
-        <nav>
-            <button class='all'>Show all Products</button>
+        <nav class='ownerNav'>
+            <h3>Welcome, {{ownerUser.ownerFirstName}}</h3>
+            <a href='#'>Add Products</a>
         </nav>
-        <div class='allProducts'>
+        <h3>{{ownerUser.shopName}} products</h3>
+        <div class='products'>
             {% for product in allProducts %}
             <div class='product'>
                 <div class='left'>
@@ -32,26 +33,6 @@
                 </div>                
             </div>
             {% endfor %}
-            <div class='product'>
-                <p>Test product</p>
-            </div>
-        </div>
-        <div class='filteredProducts'>
-            {% for product in allProducts %}
-            <div class='product'>
-                <div class='left'>
-                    <img src='{{product.itemImg}}' alt='{{product.itemName}}'/>
-                    <p><b>${{product.itemPrice}}</b></p>
-                </div>
-                <div class='right'>
-                    <h4>{{product.itemName}}</h4>
-                    <p>{{product.itemDescription}}</p>
-                </div>                
-            </div>
-            {% endfor %}
-            <div class='product'>
-                <p>Test product</p>
-            </div>
         </div>
     </div>
     <footer>
@@ -60,7 +41,5 @@
         {% endfor %}
         <a href='/admin/'><img src="{% static 'images/Capture.PNG' %}" /></a>
     </footer>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="{% static 'js/scripts.js' %}"></script>
 </body>
 </html>

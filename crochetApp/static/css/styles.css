@@ -25,14 +25,17 @@ body header {
   justify-content: center;
   align-items: center;
   background-image: url('/crochetApp/static/images/honeycombBG.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  min-width: 500px;
+  min-height: 200px;
+  background-color: #ffca0a67;
 }
 body header form {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #ffca0a67;
-  border-radius: 20%;
 }
 body header form label {
   margin: 0.5em;
@@ -81,14 +84,17 @@ body .main a {
   border: 3px solid black;
   padding: 0.2em;
 }
-body .main .products {
+body .main .allProducts {
+  display: none;
+}
+body .main .allProducts .products {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
 }
-body .main .products .product {
+body .main .allProducts .products .product {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -96,22 +102,55 @@ body .main .products .product {
   margin: 0.5em;
   border: 3px groove yellowgreen;
 }
-body .main .products .product .left {
+body .main .allProducts .products .product .left {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   margin: 0.5em;
 }
-body .main .products .product .left img {
+body .main .allProducts .products .product .left img {
   max-width: 250px;
 }
-body .main .products .product .right {
+body .main .allProducts .products .product .right {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   margin: 0.5em;
+}
+body .main .categories {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+body .main .addCategory {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+body .main .addCategory .categoryForm {
+  display: none;
+}
+body .main .addCategory .categoryForm form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffca0a67;
+  border-radius: 20%;
+}
+body .main .addCategory .categoryForm form label {
+  margin: 0.5em;
+}
+body .main .addCategory .categoryForm form input {
+  margin: 0.5em;
+}
+body .main .addCategory .categoryForm form button {
+  margin: 0.5em;
+  padding: 0.5em;
 }
 body footer {
   border: 3px solid black;

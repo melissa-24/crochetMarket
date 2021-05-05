@@ -125,7 +125,7 @@ class OwnerUser(models.Model):
     objects = OwnerUserManager()
 
 # Categories
-class Categories(models.Model):
+class Category(models.Model):
     catName = models.CharField(max_length=45)
 
 # Products
@@ -135,4 +135,4 @@ class Products(models.Model):
     itemDescription = models.TextField()
     itemPrice = models.CharField(max_length=45)
     itemImg = models.CharField(max_length=255)
-    itemCat = models.ForeignKey(Categories, related_name='category', on_delete=models.CASCADE)
+    itemCat = models.ForeignKey(Category, related_name='categoryName', on_delete=models.CASCADE)

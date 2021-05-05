@@ -4,4 +4,9 @@ $(document).ready(function() {
             width: 'toggle'
         })
     })
+    $('.showForm').click(function(){
+        $('.categoryForm').animate( {
+            width: 'toggle'
+        })
+    })
 })

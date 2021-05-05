@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Products, User, OwnerUser, Categories
+from .models import Products, User, OwnerUser, Category
 
 FOOTER = {
     'Created by Melissa',
@@ -93,3 +93,20 @@ def dashboard(request):
 #         'allProducts': Products.objects.all().values()
 #     }
 #     return render(request,'ownerDashboard.html', context)
+
+def categories(request):
+    if 'user_id' not in request.session:
+        return redirect('/')
+    user = User.objects.get(id=request.session['user_id'])
+    context = {
+        'footer': FOOTER,
+        'user': user,
+        'categories': Category.objects.all().values()
+    }
+    return render(request, 'categories.html', context)
+
+def createCat(request):
+    Category.objects.create(
+        catName=request.POST['catName']
+    )
+    return redirect('/categories/')

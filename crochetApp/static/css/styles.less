@@ -22,23 +22,26 @@ body {
         padding: 1em;
         .flexcolumn();
         background-image: url('/crochetApp/static/images/honeycombBG.png');
+        background-repeat: no-repeat;
+        background-position: center;
+        min-width: 500px;
+        min-height: 200px;
+        background-color: #ffca0a67;
 
-        form {
-            .flexcolumn();
-            background-color: #ffca0a67;
-            border-radius: 20%;
-
-            label {
-                margin: .5em;
+            form {
+                .flexcolumn();
+    
+                label {
+                    margin: .5em;
+                }
+                input {
+                    margin: .5em;
+                }
+                button {
+                    margin: .5em;
+                    padding: .5em;
+                }
             }
-            input {
-                margin: .5em;
-            }
-            button {
-                margin: .5em;
-                padding: .5em;
-            }
-        }
 
         a {
             padding: .5em;
@@ -74,26 +77,57 @@ body {
             border: 3px solid black;
             padding: .2em;
         }
-        .products {
-            .flexrow();
-            flex-wrap: wrap;
+        .allProducts {
+            display: none;
 
-            .product {
+            .products {
                 .flexrow();
-                margin: .5em;
-                border: 3px groove yellowgreen;
-
-                .left {
-                    .flexcolumn();
+                flex-wrap: wrap;
+    
+                .product {
+                    .flexrow();
                     margin: .5em;
-
-                    img {
-                        max-width: 250px;
+                    border: 3px groove yellowgreen;
+    
+                    .left {
+                        .flexcolumn();
+                        margin: .5em;
+    
+                        img {
+                            max-width: 250px;
+                        }
+                    }
+                    .right {
+                        .flexcolumn();
+                        margin: .5em;
                     }
                 }
-                .right {
+            }
+        }
+        .categories {
+            .flexcolumn();
+        }
+        .addCategory {
+            .flexcolumn();
+
+            .categoryForm {
+                display: none;
+
+                form {
                     .flexcolumn();
-                    margin: .5em;
+                    background-color: #ffca0a67;
+                    border-radius: 20%;
+        
+                    label {
+                        margin: .5em;
+                    }
+                    input {
+                        margin: .5em;
+                    }
+                    button {
+                        margin: .5em;
+                        padding: .5em;
+                    }
                 }
             }
         }

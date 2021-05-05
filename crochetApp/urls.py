@@ -13,4 +13,6 @@ urlpatterns = [
     path('logout/', views.logout),
     path('dashboard/', views.dashboard),
     # path('shop-dashboard/', views.shopDashboard),
+    path('categories/', views.categories),
+    path('createCat/', views.createCat),
 ]

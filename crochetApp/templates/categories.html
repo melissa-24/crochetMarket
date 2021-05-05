@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Categories</title>
+    {% load static %}
+    <link rel='stylesheet' href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <header>
+        <h3>Welcome, {{user.firstName}} {{user.lastName}} to The Market Place</h3>
+        <nav>
+            <a href='/logout/'>Log Out</a>
+            <a href='/dashboard/'>Dashboard</a>
+            <a href='/categories'>View/Add Categories</a>
+        </nav>
+    </header>
+    <div class='main'>
+        <div class='categories'>
+            <h4>Product Categories</h4>
+            <ul>
+                {% for cat in categories %}
+                <li>{{cat.catName}}</li>
+                {% endfor %}
+                <li>Test Category</li>
+            </ul>
+        </div>
+        <div class='addCategory'>
+            <button class='showForm'>Click to Add</button>
+            <div class='categoryForm'>
+                <form action='/createCat/' method='post'>
+                    {% csrf_token %}
+                    <section class='row'>
+                        <label for='catName'>Category Name: </label>
+                        <input type='text' id='catName' name='catName'>
+                    </section>
+                    <button>Submit New Category</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <footer>
+        {% for foot in footer %}
+        <p>{{foot}}</p>
+        {% endfor %}
+        <a href='/admin/'><img src="{% static 'images/Capture.PNG' %}" /></a>
+    </footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="{% static 'js/scripts.js' %}"></script>
+</body>
+</html>

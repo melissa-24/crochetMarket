@@ -136,3 +136,4 @@ class Products(models.Model):
     itemPrice = models.CharField(max_length=45)
     itemImg = models.CharField(max_length=255)
     itemCat = models.ForeignKey(Category, related_name='categoryName', on_delete=models.CASCADE)
+    itemShop = models.ForeignKey(OwnerUser, related_name='shop', on_delete=models.CASCADE)

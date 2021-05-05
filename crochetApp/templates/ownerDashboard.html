@@ -10,13 +10,19 @@
 </head>
 <body>
     <header>
+        <h3>Welcome, {{ownerUser.ownerFirstName}}</h3>
         <nav>
             <a href='/logout/'>Log Out</a>
+            <a href='/dashboard/'>View User Dashboard</a>
+            <a href='/shop-dashboard/'>Dashboard</a>
+            <a href='/categories/'>View/Add Product Categories</a>
+            <a href='/ownerItems/'>Your Products</a>
+            <a href='product-maint'>Add/Edit Products</a>
         </nav>
     </header>
     <div class='main'>
         <nav class='ownerNav'>
-            <h3>Welcome, {{ownerUser.ownerFirstName}}</h3>
+            
             <a href='#'>Add Products</a>
         </nav>
         <h3>{{ownerUser.shopName}} products</h3>

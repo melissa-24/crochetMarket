@@ -14,11 +14,11 @@ def index(request):
     return render(request, "index.html", context)
 
 # Shop owner landing page
-# def shopIndex(request):
-#     context = {
-#         'footer': FOOTER
-#     }
-#     return render(request, 'owner.html', context)
+def shopIndex(request):
+    context = {
+        'footer': FOOTER
+    }
+    return render(request, 'owner.html', context)
 
 # General user register route
 def register(request):
@@ -30,13 +30,13 @@ def register(request):
         return redirect('/dashboard/')
 
 # Shop Owner Register route
-# def ownerRegister(request):
-#     if request.method == "GET":
-#         return redirect('/shop-signup/')
-#     else:
-#         newOwnerUser = OwnerUser.objects.register(request.POST)
-#         request.session['ownerUser_id'] = newOwnerUser.id
-#         return redirect('/shop-dashboard/')
+def ownerRegister(request):
+    if request.method == "GET":
+        return redirect('/shop-signup/')
+    else:
+        newOwnerUser = OwnerUser.objects.register(request.POST)
+        request.session['ownerUser_id'] = newOwnerUser.id
+        return redirect('/shop-dashboard/')
 
 # General user login route
 def login(request):
@@ -47,12 +47,12 @@ def login(request):
     return redirect('/dashboard/')
 
 # Shop owner login route
-# def ownerLogin(request):
-#     if request.method == 'GET':
-#         return redirect('/owner')
-#     ownerUser = OwnerUser.objects.get(ownerUsername=request.POST['ownerUsername'])
-#     request.session['ownerUser_id'] = ownerUser.id
-#     return redirect('/shop-dashboard/')
+def ownerLogin(request):
+    if request.method == 'GET':
+        return redirect('/owner')
+    ownerUser = OwnerUser.objects.get(ownerUsername=request.POST['ownerUsername'])
+    request.session['ownerUser_id'] = ownerUser.id
+    return redirect('/shop-dashboard/')
 
 # Register landing page (for General Users)
 def signup(request):
@@ -62,11 +62,11 @@ def signup(request):
     return render(request, 'register.html', context)
 
 # Register landing page (for Shop Owners)
-# def ownerSignup(request):
-#     context = {
-#         'footer': FOOTER
-#     }
-#     return render(request, 'ownerRegister.html', context)
+def ownerSignup(request):
+    context = {
+        'footer': FOOTER
+    }
+    return render(request, 'ownerRegister.html', context)
 
 def logout(request):
     # request.session.clear()
@@ -83,16 +83,17 @@ def dashboard(request):
     }
     return render(request, 'dashboard.html', context)
 
-# def shopDashboard(request):
-#     if 'ownerUser_id' not in request.session:
-#         return redirect('/owner')
-#     ownerUser = OwnerUser.objects.get(id=request.session['ownerUser_id'])
-#     context = {
-#         'footer': FOOTER,
-#         'ownerUser': ownerUser,
-#         'allProducts': Products.objects.all().values()
-#     }
-#     return render(request,'ownerDashboard.html', context)
+# Shop Dashboard
+def shopDashboard(request):
+    if 'ownerUser_id' not in request.session:
+        return redirect('/owner')
+    ownerUser = OwnerUser.objects.get(id=request.session['ownerUser_id'])
+    context = {
+        'footer': FOOTER,
+        'ownerUser': ownerUser,
+        # 'allProducts': Products.objects.all().values()
+    }
+    return render(request,'ownerDashboard.html', context)
 
 def categories(request):
     if 'user_id' not in request.session:

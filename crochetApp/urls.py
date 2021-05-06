@@ -15,4 +15,6 @@ urlpatterns = [
     path('shop/dashboard/', views.shopDashboard),
     path('shop/categories/', views.categories),
     path('shop/createCat/', views.createCat),
+    path('shop/products/', views.products),
+    path('shop/createProduct', views.createProduct),
 ]

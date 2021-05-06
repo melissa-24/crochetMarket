@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ownerUser.shopName}}'s Dashboard</title>
+    <title>{{ownerUser.shopName}}'s Products</title>
     {% load static %}
     <link rel='stylesheet' href="{% static 'css/styles.css' %}">
 </head>
@@ -20,14 +20,9 @@
             <a href='/shop/product-maint'>Add/Edit Products</a>
         </nav>
     </header>
-    <div class='main'>
-        <nav class='ownerNav'>
-            
-            <a href='#'>Add Products</a>
-        </nav>
-        <h3>{{ownerUser.shopName}} products</h3>
+    <div class='allProducts'>
         <div class='products'>
-            {% for product in allProducts %}
+            {% for product in products %}
             <div class='product'>
                 <div class='left'>
                     <img src='{{product.itemImg}}' alt='{{product.itemName}}'/>
@@ -35,17 +30,13 @@
                 </div>
                 <div class='right'>
                     <h4>{{product.itemName}}</h4>
+                    <!-- <p>{{product.itemCat}}</p> -->
                     <p>{{product.itemDescription}}</p>
                 </div>                
             </div>
             {% endfor %}
+
         </div>
     </div>
-    <footer>
-        {% for foot in footer %}
-        <p>{{foot}}</p>
-        {% endfor %}
-        <a href='/admin/'><img src="{% static 'images/Capture.PNG' %}" /></a>
-    </footer>
 </body>
 </html>

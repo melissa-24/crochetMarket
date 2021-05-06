@@ -79,7 +79,8 @@ def dashboard(request):
     context = {
         'footer': FOOTER,
         'user': user,
-        'allProducts': Products.objects.all().values()
+        'allProducts': Products.objects.all().values(),
+
     }
     return render(request, 'dashboard.html', context)
 
@@ -111,3 +112,25 @@ def createCat(request):
         catName=request.POST['catName']
     )
     return redirect('/shop/categories/')
+
+def products(request):
+    if 'ownerUser_id' not in request.session:
+        return redirect('/shop')
+    ownerUser = OwnerUser.objects.get(id=request.session['ownerUser_id'])
+    context = {
+        'footer': FOOTER,
+        'ownerUser': ownerUser,
+        'products': Products.objects.all().values()
+    }
+    return render(request, 'products.html', context)
+
+def createProduct(request):
+    Products.objects.create(
+        itemName = request.POST['itemName'],
+        itemDescription = request.POST['itemDescription'],
+        itemPrice = request.POST['itemPrice'],
+        itemImg = request.POST['itemImg'],
+        category_id = request.POST['itemCat'],
+        ownerUser_id = request.POST['itemShop']
+    )
+    return redirect('/shop/products')

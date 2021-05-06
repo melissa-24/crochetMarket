@@ -4,3 +4,5 @@ Welcome to the HoneyBee's Crochet  A market place for fellow crocheters to showc
 
 ## Virtual Environment packages to pip install:
 django
+bcrypt
+django-environ

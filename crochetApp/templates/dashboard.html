@@ -14,6 +14,7 @@
         <nav>
             <a href='/logout/'>Log Out</a>
             <a href='/dashboard/'>Dashboard</a>
+            <a href='#'>Profile</a>
         </nav>
     </header>
     <div class='main'>
@@ -41,19 +42,6 @@
             </div>
         </div>
         <div class='filteredProducts'>
-            {% for product in allProducts %}
-            <div class='product'>
-                <div class='left'>
-                    <img src='{{product.itemImg}}' alt='{{product.itemName}}'/>
-                    <p><b>${{product.itemPrice}}</b></p>
-                </div>
-                <div class='right'>
-                    <h4>{{product.itemName}}</h4>
-                    <p>{{product.itemCat}}</p>
-                    <p>{{product.itemDescription}}</p>
-                </div>                
-            </div>
-            {% endfor %}
             <div class='product'>
                 <p>Test product</p>
             </div>

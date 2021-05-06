@@ -13,8 +13,8 @@
         <h1>Welcome to the Market Place</h1>
         <p>Please login to view your shop and manage your products</p>
         <p>Not a shop owner? <a href='/'>Member Login</a></p>
-        <p>Want to be a shop owner? <a href='/shop-register'>Sign up</a></p>
-        <form action='/shop-login/' method='post'>
+        <p>Want to be a shop owner? <a href='/shop/register'>Sign up</a></p>
+        <form action='/shop/login/' method='post'>
             {% csrf_token %}
             <section class='row'>
                 <label for='ownerUsername'>Username</label>

@@ -32,11 +32,11 @@ def register(request):
 # Shop Owner Register route
 def ownerRegister(request):
     if request.method == "GET":
-        return redirect('/shop-signup/')
+        return redirect('/shop/signup/')
     else:
         newOwnerUser = OwnerUser.objects.register(request.POST)
         request.session['ownerUser_id'] = newOwnerUser.id
-        return redirect('/shop-dashboard/')
+        return redirect('/shop/dashboard/')
 
 # General user login route
 def login(request):
@@ -49,10 +49,10 @@ def login(request):
 # Shop owner login route
 def ownerLogin(request):
     if request.method == 'GET':
-        return redirect('/owner')
+        return redirect('/shop')
     ownerUser = OwnerUser.objects.get(ownerUsername=request.POST['ownerUsername'])
     request.session['ownerUser_id'] = ownerUser.id
-    return redirect('/shop-dashboard/')
+    return redirect('/shop/dashboard/')
 
 # Register landing page (for General Users)
 def signup(request):
@@ -86,7 +86,7 @@ def dashboard(request):
 # Shop Dashboard
 def shopDashboard(request):
     if 'ownerUser_id' not in request.session:
-        return redirect('/owner')
+        return redirect('/shop')
     ownerUser = OwnerUser.objects.get(id=request.session['ownerUser_id'])
     context = {
         'footer': FOOTER,
@@ -96,12 +96,12 @@ def shopDashboard(request):
     return render(request,'ownerDashboard.html', context)
 
 def categories(request):
-    if 'user_id' not in request.session:
-        return redirect('/')
-    user = User.objects.get(id=request.session['user_id'])
+    if 'ownerUser_id' not in request.session:
+        return redirect('/shop')
+    ownerUser = OwnerUser.objects.get(id=request.session['ownerUser_id'])
     context = {
         'footer': FOOTER,
-        'user': user,
+        'ownerUser': ownerUser,
         'categories': Category.objects.all().values()
     }
     return render(request, 'categories.html', context)
@@ -110,4 +110,4 @@ def createCat(request):
     Category.objects.create(
         catName=request.POST['catName']
     )
-    return redirect('/categories/')
+    return redirect('/shop/categories/')

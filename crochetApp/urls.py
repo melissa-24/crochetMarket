@@ -3,16 +3,16 @@ from . import views
 
 urlpatterns = [
     path('', views.index),
-    path('owner/', views.shopIndex),
+    path('shop/', views.shopIndex),
     path('logout/', views.logout),
     path('login/', views.login),
-    path('shop-login/', views.ownerLogin),
+    path('shop/login/', views.ownerLogin),
     path('signup/', views.signup),
-    path('shop-signup/', views.ownerSignup),
+    path('shop/signup/', views.ownerSignup),
     path('register/', views.register),
-    path('shop-register/', views.ownerRegister),
+    path('shop/register/', views.ownerRegister),
     path('dashboard/', views.dashboard),
-    path('shop-dashboard/', views.shopDashboard),
-    path('categories/', views.categories),
-    path('createCat/', views.createCat),
+    path('shop/dashboard/', views.shopDashboard),
+    path('shop/categories/', views.categories),
+    path('shop/createCat/', views.createCat),
 ]

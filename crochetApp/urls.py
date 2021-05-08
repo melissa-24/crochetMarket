@@ -5,6 +5,7 @@ urlpatterns = [
     path('', views.index),
     path('shop/', views.shopIndex),
     path('logout/', views.logout),
+    path('shop/logout/', views.shopLogout),
     path('login/', views.login),
     path('shop/login/', views.ownerLogin),
     path('signup/', views.signup),
@@ -16,5 +17,5 @@ urlpatterns = [
     path('shop/categories/', views.categories),
     path('shop/createCat/', views.createCat),
     path('shop/products/', views.products),
-    path('shop/createProduct', views.createProduct),
+    path('shop/createProd/', views.createProduct),
 ]

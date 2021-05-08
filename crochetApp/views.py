@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.contrib import messages
 from .models import Products, User, OwnerUser, Category
 
 FOOTER = {
@@ -24,6 +25,11 @@ def shopIndex(request):
 def register(request):
     if request.method == "GET":
         return redirect('/signup/')
+    errors = User.objects.validate(request.POST)
+    if errors:
+        for err in errors.values():
+            messages.error(request, err)
+            return redirect('/')
     else:
         newUser = User.objects.register(request.POST)
         request.session['user_id'] = newUser.id
@@ -40,19 +46,27 @@ def ownerRegister(request):
 
 # General user login route
 def login(request):
-    if request.method == 'GET':
-        return redirect('/')
-    user = User.objects.get(username=request.POST['username'])
-    request.session['user_id'] = user.id
-    return redirect('/dashboard/')
+    if request.method == 'POST':
+        attemptedLogin=User.objects.filter(username=request.POST['username'])
+        if attemptedLogin:
+            userLogin=attemptedLogin[0]
+            if userLogin.password == request.POST['pw']:
+                request.session['user_id']=userLogin.id
+                return redirect('/dashboard')
+    messages.error(request, "That username does not exist please sign up")
+    return redirect('/')
 
 # Shop owner login route
 def ownerLogin(request):
-    if request.method == 'GET':
-        return redirect('/shop')
-    ownerUser = OwnerUser.objects.get(ownerUsername=request.POST['ownerUsername'])
-    request.session['ownerUser_id'] = ownerUser.id
-    return redirect('/shop/dashboard/')
+    if request.method == 'POST':
+        ownerAttemptedLogin=OwnerUser.objects.filter(ownerUsername=request.POST['ownerUsername'])
+        if ownerAttemptedLogin:
+            ownerUserLogin=attemptedLogin[0]
+            if ownerUserLogin.ownerPassword == request.POST['opw']:
+                request.session['ownerUser_id']=ownerUserLogin.id
+                return redirect('/shop/dashboard')
+    messages.error(request, "That username does not exist please sign up")
+    return redirect('/')
 
 # Register landing page (for General Users)
 def signup(request):
@@ -69,8 +83,12 @@ def ownerSignup(request):
     return render(request, 'ownerRegister.html', context)
 
 def logout(request):
-    # request.session.clear()
+    request.session.clear()
     return redirect('/')
+
+def shopLogout(request):
+    request.session.clear()
+    return redirect('/shop/')
 
 def dashboard(request):
     if 'user_id' not in request.session:

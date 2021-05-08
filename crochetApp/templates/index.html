@@ -13,6 +13,13 @@
         <h1>Welcome to the Market Place</h1>
         <p>Please login to see our products</p>
         <p>Don't have an account? <a href='signup/'>Sign Up</a></p>
+        {% if messages %}
+        <section class='messages'>
+            {% for message in messages %}
+            <h3 {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</h3>
+            {% endfor %}
+        </section>
+        {% endif %}
         <form action='/login/' method='post'>
             {% csrf_token %}
             <section class='row'>

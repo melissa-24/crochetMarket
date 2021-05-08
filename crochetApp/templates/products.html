@@ -13,30 +13,44 @@
         <h2>{{ownerUser.shopName}}</h2>
         <h3>Welcome, {{ownerUser.ownerFirstName}}</h3>
         <nav>
-            <a href='/logout/'>Log Out</a>
+            <a href='/shop/logout/'>Log Out</a>
             <a href='/shop/dashboard/'>Dashboard</a>
             <a href='/shop/categories/'>View/Add Product Categories</a>
             <a href='/shop/products/'>Your Products</a>
-            <a href='/shop/product-maint'>Add/Edit Products</a>
         </nav>
     </header>
-    <div class='allProducts'>
-        <div class='products'>
-            {% for product in products %}
-            <div class='product'>
-                <div class='left'>
-                    <img src='{{product.itemImg}}' alt='{{product.itemName}}'/>
-                    <p><b>${{product.itemPrice}}</b></p>
-                </div>
-                <div class='right'>
-                    <h4>{{product.itemName}}</h4>
-                    <!-- <p>{{product.itemCat}}</p> -->
-                    <p>{{product.itemDescription}}</p>
-                </div>                
+    <div class='main'>
+        <div class='addProduct'>
+            <button class='showProdForm'>Click to add New Products</button>
+            <div class='productForm'>
+                <form>Test</form>
             </div>
-            {% endfor %}
-
+        </div>
+        <div class='allProducts'>
+            <div class='products'>
+                {% for product in products %}
+                <div class='product'>
+                    <div class='left'>
+                        <img src='{{product.itemImg}}' alt='{{product.itemName}}'/>
+                        <p><b>${{product.itemPrice}}</b></p>
+                    </div>
+                    <div class='right'>
+                        <h4>{{product.itemName}}</h4>
+                        <!-- <p>{{product.itemCat}}</p> -->
+                        <p>{{product.itemDescription}}</p>
+                    </div>                
+                </div>
+                {% endfor %}
+            </div>
         </div>
     </div>
+    <footer>
+        {% for foot in footer %}
+        <p>{{foot}}</p>
+        {% endfor %}
+        <a href='/admin/'><img src="{% static 'images/Capture.PNG' %}" /></a>
+    </footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="{% static 'js/scripts.js' %}"></script>
 </body>
 </html>

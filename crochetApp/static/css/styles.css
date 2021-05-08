@@ -31,6 +31,15 @@ body header {
   min-height: 200px;
   background-color: #ffca0a67;
 }
+body header section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+body header section h3 {
+  color: darkred;
+}
 body header form {
   display: flex;
   flex-direction: column;

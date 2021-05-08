@@ -9,4 +9,9 @@ $(document).ready(function() {
             width: 'toggle'
         })
     })
+    $('.showProdForm').click(function(){
+        $('.productForm').animate( {
+            width: 'toggle'
+        })
+    })
 })

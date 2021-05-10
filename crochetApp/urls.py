@@ -16,6 +16,9 @@ urlpatterns = [
     path('shop/dashboard/', views.shopDashboard),
     path('shop/categories/', views.categories),
     path('shop/createCat/', views.createCat),
+    path('shop/<int:category_id>/editCat/', views.editCat),
+    path('shop/<int:category_id>/updateCat/', views.updateCat),
+    path('shop/<int:category_id>/deleteCat/', views.deleteCat),
     path('shop/products/', views.products),
     path('shop/createProd/', views.createProduct),
 ]

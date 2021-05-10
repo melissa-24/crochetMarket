@@ -134,6 +134,12 @@ body .main .categories {
   justify-content: center;
   align-items: center;
 }
+body .main .categories ul li {
+  margin: 1em;
+}
+body .main .categories ul li .h {
+  display: none;
+}
 body .main .addCategory {
   display: flex;
   flex-direction: column;

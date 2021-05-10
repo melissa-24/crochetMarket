@@ -24,9 +24,8 @@
             <h4>Product Categories</h4>
             <ul>
                 {% for cat in categories %}
-                <li>{{cat.catName}}</li>
+                <li>{{cat.catName}} <span class='h'>{{cat.id}}</span><span><a href='/shop/{{cat.id}}/editCat/'>Edit Category</a></span></li>
                 {% endfor %}
-                <li>Test Category</li>
             </ul>
         </div>
         <div class='addCategory'>

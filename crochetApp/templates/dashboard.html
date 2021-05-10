@@ -27,18 +27,18 @@
                 <div class='product'>
                     <div class='left'>
                         <img src='{{product.itemImg}}' alt='{{product.itemName}}'/>
+                        <h4>{{product.shop_id}}</h4>
                         <p><b>${{product.itemPrice}}</b></p>
                     </div>
                     <div class='right'>
                         <h4>{{product.itemName}}</h4>
-                        <!-- <p>{{product.itemCat}}</p> -->
+                        <p>{{product.itemCat}}</p>
                         <p>{{product.itemDescription}}</p>
+                        <!-- <a href='/shop/product/'>View Product</a> -->
                     </div>                
                 </div>
                 {% endfor %}
-                <div class='product'>
-                    <p>Test product</p>
-                </div>
+
             </div>
         </div>
         <div class='filteredProducts'>

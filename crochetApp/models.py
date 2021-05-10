@@ -43,13 +43,13 @@ class UserManager(models.Manager):
         return bcrypt.checkpw(password.encode(), user.password.encode())
 
     def register(self, form):
-        pw = bcrypt.hashpw(form['password'].encode(), bcrypt.gensalt()).decode()
+        password = bcrypt.hashpw(form['password'].encode(), bcrypt.gensalt()).decode()
         return self.create(
             firstName = form['firstName'],
             lastName = form['lastName'],
             email = form['email'],
             username = form['username'],
-            password = pw
+            password = password
         )
 
 class User(models.Model):
@@ -104,14 +104,14 @@ class OwnerUserManager(models.Manager):
         return bcrypt.checkpw(ownerPassword.encode(), ownerUser.ownerPassword.encode())
 
     def register(self, form):
-        opw = bcrypt.hashpw(form['ownerPassword'].encode(), bcrypt.gensalt()).decode()
+        ownerPassword = bcrypt.hashpw(form['ownerPassword'].encode(), bcrypt.gensalt()).decode()
         return self.create(
             ownerFirstName = form['ownerFirstName'],
             ownerLastName = form['ownerLastName'],
             ownerEmail = form['ownerEmail'],
             ownerUsername = form['ownerUsername'],
             shopName = form['shopName'],
-            ownerPassword = opw
+            ownerPassword = ownerPassword
         )
 
 class OwnerUser(models.Model):

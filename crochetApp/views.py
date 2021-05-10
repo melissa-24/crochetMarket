@@ -24,7 +24,7 @@ def login(request):
         attemptedLogin=User.objects.filter(username=request.POST['username'])
         if attemptedLogin:
             userLogin=attemptedLogin[0]
-            if userLogin.password == request.POST['pw']:
+            if userLogin.password == request.POST['password']:
                 request.session['user_id']=userLogin.id
                 return redirect('/dashboard')
     messages.error(request, "That username does not exist please sign up")
@@ -101,12 +101,12 @@ def ownerLogin(request):
     if request.method == 'POST':
         ownerAttemptedLogin=OwnerUser.objects.filter(ownerUsername=request.POST['ownerUsername'])
         if ownerAttemptedLogin:
-            ownerUserLogin=attemptedLogin[0]
-            if ownerUserLogin.ownerPassword == request.POST['opw']:
+            ownerUserLogin=ownerAttemptedLogin[0]
+            if ownerUserLogin.ownerPassword == request.POST['ownerPassword']:
                 request.session['ownerUser_id']=ownerUserLogin.id
                 return redirect('/shop/dashboard')
     messages.error(request, "That username does not exist please sign up")
-    return redirect('/')
+    return redirect('/shop/')
 
 # Register landing page (for Shop Owners)
 def ownerSignup(request):

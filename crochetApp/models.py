@@ -1,8 +1,6 @@
 from django.db import models
 import re
-import bcrypt
-
-EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
+# import bcrypt
 
 # General users
 
@@ -14,6 +12,8 @@ class UserManager(models.Manager):
 
         if len(form['lastName']) < 2:
             errors['lastName'] = 'Last Name must be at least 2 characters'
+
+        EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
 
         if not EMAIL_REGEX.match(form['email']):
             errors['email'] = 'Invalid Email Address'
@@ -34,24 +34,6 @@ class UserManager(models.Manager):
 
         return errors
 
-    def authenticate(self, username, password):
-        users = self.filter(username=username)
-        if not users:
-            return False
-        
-        user = users[0]
-        return bcrypt.checkpw(password.encode(), user.password.encode())
-
-    def register(self, form):
-        pw = bcrypt.hashpw(form['password'].encode(), bcrypt.gensalt()).decode()
-        return self.create(
-            firstName = form['firstName'],
-            lastName = form['lastName'],
-            email = form['email'],
-            username = form['username'],
-            password = pw
-        )
-
 class User(models.Model):
     firstName = models.CharField(max_length=45)
     lastName = models.CharField(max_length=45)
@@ -60,6 +42,9 @@ class User(models.Model):
     password = models.CharField(max_length=45)
 
     objects = UserManager()
+
+    userCreatedAt = models.DateTimeField(auto_now_add=True)
+    userUpdatedAt = models.DateTimeField(auto_now=True)
 
 # Shop owners
 
@@ -72,10 +57,12 @@ class OwnerUserManager(models.Manager):
         if len(form['ownerLastName']) < 2:
             errors['ownerLastName'] = 'Last Name must be at least 2 characters'
 
+        EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
+
         if not EMAIL_REGEX.match(form['ownerEmail']):
             errors['ownerEmail'] = 'Invalid Email Address'
 
-        ownerEmailCheck = self.filter(email=form['ownerEmail'])
+        ownerEmailCheck = self.filter(ownerEmail=form['ownerEmail'])
         if ownerEmailCheck:
             errors['ownerEmail'] = 'Email Address already in use'
 
@@ -95,25 +82,6 @@ class OwnerUserManager(models.Manager):
 
         return errors
 
-    def ownerAuthenticate(self, ownerUsername, ownerPassword):
-        ownerUsers = self.filter(ownerUsername=ownerUsername)
-        if not ownerUsers:
-            return False
-        
-        ownerUser = ownerUsers[0]
-        return bcrypt.checkpw(ownerPassword.encode(), ownerUser.ownerPassword.encode())
-
-    def ownerRegister(self, form):
-        opw = bcrypt.hashpw(form['ownerPassword'].encode(), bcrypt.gensalt()).decode()
-        return self.create(
-            ownerFirstName = form['ownerFirstName'],
-            ownerLastName = form['ownerLastName'],
-            ownerEmail = form['ownerEmail'],
-            ownerUsername = form['ownerUsername'],
-            shopName = form['shopName'],
-            ownerPassword = opw
-        )
-
 class OwnerUser(models.Model):
     ownerFirstName = models.CharField(max_length=45)
     ownerLastName = models.CharField(max_length=45)
@@ -124,9 +92,8 @@ class OwnerUser(models.Model):
 
     objects = OwnerUserManager()
 
-# Categories
-class Category(models.Model):
-    catName = models.CharField(max_length=45)
+    ownerUserCreatedAt = models.DateTimeField(auto_now_add=True)
+    ownerUserUpdatedAt = models.DateTimeField(auto_now=True)
 
 # Products
 
@@ -135,5 +102,9 @@ class Products(models.Model):
     itemDescription = models.TextField()
     itemPrice = models.CharField(max_length=45)
     itemImg = models.CharField(max_length=255)
-    itemCat = models.ForeignKey(Category, related_name='categoryName', on_delete=models.CASCADE)
     itemShop = models.ForeignKey(OwnerUser, related_name='shop', on_delete=models.CASCADE)
+
+# Categories
+class Category(models.Model):
+    catName = models.CharField(max_length=45)
+    assignedCat = models.ManyToManyField(Products, related_name='categories')

@@ -23,7 +23,33 @@
         <div class='addProduct'>
             <button class='showProdForm'>Click to add New Products</button>
             <div class='productForm'>
-                <form>Test</form>
+                <form action='/shop/createProd/' method='post'>
+                    {% csrf_token %}
+                    <section class='row'>
+                        <label for='itemName'>Product Name: </label>
+                        <input type='text' id='itemName' name='itemName'>
+                    </section> 
+                    <section class='row'>
+                        <label for='itemDescription'>Product Description: </label>
+                        <input type='text' id='itemDescription' name='itemDescription'>
+                    </section> 
+                    <section class='row'>
+                        <label for='itemPrice'>Product Price: </label>
+                        <input type='number' id='itemPrice' name='itemPrice'>
+                    </section> 
+                    <section class='row'>
+                        <label for='itemImg'>Link to Product Image: </label>
+                        <input type='text' id='itemImg' name='itemImg'>
+                    </section> 
+                    <section class='row'>
+                        <select name='ownerUser_id' id=''>
+                            {% for store in shop %}
+                            <option value='{{store.id}}'>{{store.shopName}}</option>
+                            {% endfor %}
+                        </select>
+                    </section> 
+                    <button>Add Product</button>
+                </form>
             </div>
         </div>
         <div class='allProducts'>
@@ -36,7 +62,6 @@
                     </div>
                     <div class='right'>
                         <h4>{{product.itemName}}</h4>
-                        <!-- <p>{{product.itemCat}}</p> -->
                         <p>{{product.itemDescription}}</p>
                     </div>                
                 </div>

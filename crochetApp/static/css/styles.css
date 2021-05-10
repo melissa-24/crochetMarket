@@ -93,8 +93,37 @@ body .main a {
   border: 3px solid black;
   padding: 0.2em;
 }
-body .main .allProducts {
+body .main .addProduct {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+body .main .addProduct .productForm {
   display: none;
+}
+body .main .addProduct .productForm form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+body .main .addProduct .productForm form label {
+  margin: 0.5em;
+}
+body .main .addProduct .productForm form input {
+  margin: 0.5em;
+}
+body .main .addProduct .productForm form button {
+  margin: 0.5em;
+  padding: 0.5em;
+}
+body .main .allProducts {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
 }
 body .main .allProducts .products {
   display: flex;

@@ -119,8 +119,13 @@ def ownerSignup(request):
 def ownerRegister(request):
     if request.method == "GET":
         return redirect('/shop/signup/')
+    errors = OwnerUser.objects.ownerValidate(request.POST)
+    if errors:
+        for err in errors.values():
+            messages.error(request, err)
+            return redirect('/')
     else:
-        newOwnerUser = OwnerUser.objects.register(request.POST)
+        newOwnerUser = OwnerUser.objects.ownerRegister(request.POST)
         request.session['ownerUser_id'] = newOwnerUser.id
         return redirect('/shop/dashboard/')
 

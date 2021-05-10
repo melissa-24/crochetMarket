@@ -43,13 +43,13 @@ class UserManager(models.Manager):
         return bcrypt.checkpw(password.encode(), user.password.encode())
 
     def register(self, form):
-        password = bcrypt.hashpw(form['password'].encode(), bcrypt.gensalt()).decode()
+        pw = bcrypt.hashpw(form['password'].encode(), bcrypt.gensalt()).decode()
         return self.create(
             firstName = form['firstName'],
             lastName = form['lastName'],
             email = form['email'],
             username = form['username'],
-            password = password
+            password = pw
         )
 
 class User(models.Model):
@@ -64,7 +64,7 @@ class User(models.Model):
 # Shop owners
 
 class OwnerUserManager(models.Manager):
-    def validate(self, form):
+    def ownerValidate(self, form):
         errors = {}
         if len(form['ownerFirstName']) < 2:
             errors['ownerFirstName'] = 'First Name must be at least 2 characters'
@@ -95,7 +95,7 @@ class OwnerUserManager(models.Manager):
 
         return errors
 
-    def authenticate(self, ownerUsername, ownerPassword):
+    def ownerAuthenticate(self, ownerUsername, ownerPassword):
         ownerUsers = self.filter(ownerUsername=ownerUsername)
         if not ownerUsers:
             return False
@@ -103,15 +103,15 @@ class OwnerUserManager(models.Manager):
         ownerUser = ownerUsers[0]
         return bcrypt.checkpw(ownerPassword.encode(), ownerUser.ownerPassword.encode())
 
-    def register(self, form):
-        ownerPassword = bcrypt.hashpw(form['ownerPassword'].encode(), bcrypt.gensalt()).decode()
+    def ownerRegister(self, form):
+        opw = bcrypt.hashpw(form['ownerPassword'].encode(), bcrypt.gensalt()).decode()
         return self.create(
             ownerFirstName = form['ownerFirstName'],
             ownerLastName = form['ownerLastName'],
             ownerEmail = form['ownerEmail'],
             ownerUsername = form['ownerUsername'],
             shopName = form['shopName'],
-            ownerPassword = ownerPassword
+            ownerPassword = opw
         )
 
 class OwnerUser(models.Model):

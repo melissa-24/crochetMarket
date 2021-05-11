@@ -69,8 +69,11 @@ def dashboard(request):
         'footer': FOOTER,
         'user': user,
         'allProducts': Products.objects.all().values(),
+        'allShops': Store.objects.all().values(),
 
     }
+    print(Products.objects.all().values())
+    print(Store.objects.all().values())
     return render(request, 'dashboard.html', context)
 
 # -------General User Logout-------
@@ -140,7 +143,6 @@ def ownerRegister(request):
         ownerLastName = request.POST['ownerLastName'],
         ownerUsername = request.POST['ownerUsername'],
         ownerEmail = request.POST['ownerEmail'],
-        shopName = request.POST['shopName'],
         ownerPassword = hashedOpw
     )
     request.session['ownerUser_id'] = newOwnerUser.id
@@ -154,7 +156,8 @@ def shopDashboard(request):
     context = {
         'footer': FOOTER,
         'ownerUser': ownerUser,
-        'allProducts': Products.objects.all().values()
+        'allProducts': Products.objects.all().values(),
+        'allOwnerShops': Store.objects.all().values()
     }
     return render(request,'ownerDashboard.html', context)
 
@@ -162,6 +165,22 @@ def shopDashboard(request):
 def shopLogout(request):
     request.session.clear()
     return redirect('/shop/')
+
+# -------Create New Shop Route-------
+def createShop(request):
+    if 'ownerUser_id' not in request.session:
+        return redirect('/shop')
+    ownerShop = OwnerUser.objects.get(id = request.POST['ownerUser_id'])
+    Store.objects.create(
+        shopName=request.POST['shopName'],
+        shopDescription=request.POST['shopDescription'],
+        shopOwner=ownerShop
+    )
+    return redirect('/shop/dashboard/')
+
+# -------Display Specific Owner Shop Landing Page-------
+def shop(request):
+    pass
 
 # -------Display Categories Landing Page-------
 def categories(request):
@@ -228,7 +247,7 @@ def createProduct(request):
     if 'ownerUser_id' not in request.session:
         return redirect('/shop')
     ownerUser = OwnerUser.objects.get(id=request.session['ownerUser_id'])
-    ownerShop = OwnerUser.objects.get(id = request.POST['ownerUser_id'])
+    ownerShop = Store.objects.get(id = request.POST['store_id'])
 
     newProducts = Products.objects.create(
         itemName = request.POST['itemName'],

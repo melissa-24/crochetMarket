@@ -70,10 +70,6 @@ class OwnerUserManager(models.Manager):
         if ownerUsernameCheck:
             errors['ownerUsername'] = 'Username already in use'
 
-        shopNameCheck = self.filter(shopName=form['shopName'])
-        if shopNameCheck:
-            errors['shopName'] = 'Shop Name already in use'
-
         if len(form['ownerPassword']) < 6:
             errors['ownerPassword'] = 'Password must be at least 6 characters'
 
@@ -87,13 +83,18 @@ class OwnerUser(models.Model):
     ownerLastName = models.CharField(max_length=45)
     ownerEmail = models.EmailField(unique=True)
     ownerUsername = models.CharField(max_length=45)
-    shopName = models.CharField(max_length=50)
     ownerPassword = models.CharField(max_length=45)
 
     objects = OwnerUserManager()
 
     ownerUserCreatedAt = models.DateTimeField(auto_now_add=True)
     ownerUserUpdatedAt = models.DateTimeField(auto_now=True)
+
+# Store
+class Store(models.Model):
+    shopName = models.CharField(max_length=45)
+    shopDescription = models.TextField()()
+    shopOwner = models.ForeignKey(OwnerUser, related_name='ownerStore', on_delete=models.CASCADE)
 
 # Products
 
@@ -102,7 +103,8 @@ class Products(models.Model):
     itemDescription = models.TextField()
     itemPrice = models.CharField(max_length=45)
     itemImg = models.CharField(max_length=255)
-    itemShop = models.ForeignKey(OwnerUser, related_name='shop', on_delete=models.CASCADE)
+    itemCount = models.IntegerField()
+    itemShop = models.ForeignKey(Store, related_name='shop', on_delete=models.CASCADE)
 
 # Categories
 class Category(models.Model):

@@ -119,11 +119,7 @@ body .main .addProduct .productForm form button {
   padding: 0.5em;
 }
 body .main .allProducts {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
+  display: none;
 }
 body .main .allProducts .products {
   display: flex;

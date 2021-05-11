@@ -4,6 +4,7 @@ Main landing page defaults to login with some basic information about the site
 ### Contains:
 Login form
 Link to sign up
+Link to Owner sign up
 
 ## register.html
 Main page to signup
@@ -15,12 +16,10 @@ Link back to log in page
 Main landing page after login/register
 ### Contains:
 Main navigation including a log out button
-default view of user items (if 2 types of log ins then defaults to all items for general and shop owners items for shop owner)
 #### navigation:
 logout
 view shops
 all items
-your items
 
 ## product.html?
 Single product view
@@ -55,4 +54,5 @@ password
 product = itemName
 description = itemDescription
 price = itemPrice
+quantity = itemCount
 shop name = [drop down with shopNames to ensure it goes to the right one]
